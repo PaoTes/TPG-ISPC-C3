@@ -1,6 +1,6 @@
 # Proyecto integrador - Desarrollo Web
 
-## Integrantes: 
+## Integrantes (actualizado): 
 
 - Erica Vanina Robledo
 
@@ -11,8 +11,6 @@
 - Valentina Tachini
 
 - Andrea Paola Testa
-
-- Germán Rasch
 
 - Sergio Gabriel Valdiviezo
 
