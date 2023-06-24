@@ -118,16 +118,15 @@ while True:
     print("")
     opcion = input("[Por favor, ingrese una opción del 1 al 6]: ")
 
-    if opcion == "1":
-        n_normativa = input("Ingrese el número de normativa [Por ejemplo: '20.744']: ")
-        fecha = input("Ingrese la fecha [Formato 'DD-MM-AA']: ")
-        descripcion = input("Ingrese la descripción de ley: ")
+     if opcion == "1":
+        n_normativa = input("Ingrese el número de normativa (Ej. 20.974) : ")
+        fecha = input("Ingrese la fecha: ")
+        descripcion = input("Ingrese la descripción: ")
         o_legislativo = input("Ingrese el órgano legislativo: ")
-        p_clave = input("Ingrese la palabra clave [Por ejemplo: 'Trabajo']: ")
+        p_clave = input("Ingrese la palabra clave: ")
         tnormativa_id = int ( input("\n Seleccione normativa\n1. ley\n2. Norma\n3. Resolucion\nIngrese el ID de la normativa: "))
         categoria_id = int ( input("\n Seleccione categoría\n1. Laboral \n2. Penal \n3. Civil\n4. Comercial\n5. Familia y Sucesiones\n6. Agrario y Ambiental\n7. Minería\n8. Derecho informático\n	Ingrese el ID de la categoría: "))
         jurisdiccion_id = int ( input("\n Seleccion jurisdicción\n1. Nacional\n2. Provincial\n Ingrese el ID de la jurisdicción: "))
-
         ley = Ley(n_normativa, fecha, descripcion, o_legislativo, p_clave, tnormativa_id, categoria_id, jurisdiccion_id)
         crud.insert_ley(ley)
         print("Ley agregada correctamente.")
@@ -135,7 +134,12 @@ while True:
     elif opcion == "2":
         leyes = crud.get_all_leys()
         for ley in leyes:
-            print(ley)
+           print("\n")
+           print("*"*150)
+           ley_t= '''Num Registro: {}\nNum Normativa: {}\nFecha: {}\nDescripcion: {}\nOrgano Legislativo: {}\nPalabra Clave: {}\nTipo Normativa: {}
+           \nCategoria: {}\nJurisdiccion: {}\n'''.format(*ley)
+           print(ley_t)
+           print("*"*150)
 
     elif opcion == "3":
         p_clave = input("Ingrese la palabra clave a buscar: ")
