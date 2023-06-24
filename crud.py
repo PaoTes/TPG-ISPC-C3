@@ -61,11 +61,12 @@ class CRUDLeyes:
     def get_ley_by_p_clave(self, p_clave):
         self.cursor.execute('''SELECT * FROM leyes WHERE p_clave = ?''', (p_clave,))
         return self.cursor.fetchall()
-     def find_normativa(self):
-        self.cursor.execute('''SELECT tnormativa.nombre FROM leyes
-                INNER JOIN tnormativa ON leyes.tnormativa_id = tnormativa.id
-                ''')
-        return self.cursor.fetchone()
+        
+    def find_normativa(self):
+       self.cursor.execute('''SELECT tnormativa.nombre FROM leyes
+               INNER JOIN tnormativa ON leyes.tnormativa_id = tnormativa.id
+               ''')
+       return self.cursor.fetchone()
     
     def find_categoria(self):
         self.cursor.execute('''SELECT categoria.nombre FROM leyes
