@@ -1,7 +1,8 @@
 import sqlite3
 
 class Ley:
-    def __init__(self, n_normativa, fecha, descripcion, o_legislativo, p_clave, tnormativa_id, categoria_id, jurisdiccion_id):
+    def __init__(self,id_registro, n_normativa, fecha, descripcion, o_legislativo, p_clave, tnormativa_id, categoria_id, jurisdiccion_id):
+        self.id_registro = id_registro
         self.n_normativa = n_normativa
         self.fecha = fecha
         self.descripcion = descripcion
@@ -145,10 +146,13 @@ while True:
         p_clave = input("Ingrese la palabra clave a buscar: ")
         leyes = crud.get_ley_by_p_clave(p_clave)
         for ley in leyes:
-            print(ley)
-
+            print("\n")
+            print("*"*150)
+            ley_t= '''Num Registro: {}\nNum Normativa: {}\nFecha: {}\nDescripcion: {}\nOrgano Legislativo: {}\nPalabra Clave: {}\nTipo Normativa: {}\nCategoria: {}\nJurisdiccion: {}\n'''.format(*ley)
+            print(ley_t)
+            print("*"*150)
     elif opcion == "4":
-        p_clave = input("Ingrese la palabra clave de la ley a actualizar [Ejemplo 20.759] : ")
+        p_clave = input("Ingrese la palabra clave de la ley a actualizar: ")
         leyes = crud.get_ley_by_p_clave(p_clave)
         if leyes:
             ley_actualizar = leyes[0]
@@ -157,8 +161,17 @@ while True:
             fecha = input("Nueva fecha: ")
             descripcion = input("Nueva descripción: ")
             o_legislativo = input("Nuevo órgano legislativo: ")
+            resultado = crud.find_normativa()
+            resultado=resultado[0]
+            print(f"Tipo Normativa Actual: {resultado}")
             tnormativa_id = input("Nuevo ID de la normativa: ")
+            resultado = crud.find_categoria()
+            resultado=resultado[0]
+            print(f"La Categoria Actual: {resultado}")
             categoria_id = input("Nuevo ID de la categoría: ")
+            resultado = crud.find_jurisdiccion()
+            resultado=resultado[0]
+            print(f"La Jurisdiccion actual es: {resultado}")
             jurisdiccion_id = input("Nuevo ID de la jurisdicción: ")
 
         if n_normativa:
