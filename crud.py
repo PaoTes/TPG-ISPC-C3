@@ -1,8 +1,7 @@
 import sqlite3
 
 class Ley:
-    def __init__(self,id_registro, n_normativa, fecha, descripcion, o_legislativo, p_clave, tnormativa_id, categoria_id, jurisdiccion_id):
-        self.id_registro = id_registro
+    def __init__(self, n_normativa, fecha, descripcion, o_legislativo, p_clave, tnormativa_id, categoria_id, jurisdiccion_id):
         self.n_normativa = n_normativa
         self.fecha = fecha
         self.descripcion = descripcion
@@ -61,12 +60,11 @@ class CRUDLeyes:
     def get_ley_by_p_clave(self, p_clave):
         self.cursor.execute('''SELECT * FROM leyes WHERE p_clave = ?''', (p_clave,))
         return self.cursor.fetchall()
-        
     def find_normativa(self):
-       self.cursor.execute('''SELECT tnormativa.nombre FROM leyes
-               INNER JOIN tnormativa ON leyes.tnormativa_id = tnormativa.id
-               ''')
-       return self.cursor.fetchone()
+        self.cursor.execute('''SELECT tnormativa.nombre FROM leyes
+                INNER JOIN tnormativa ON leyes.tnormativa_id = tnormativa.id
+                ''')
+        return self.cursor.fetchone()
     
     def find_categoria(self):
         self.cursor.execute('''SELECT categoria.nombre FROM leyes
@@ -93,11 +91,11 @@ class CRUDLeyes:
         self.connection.commit()
 
 def mostrar_menu():
-    print("\t[1] Agregar ley")
-    print("\t[2] Listar todas las leyes")
+    print("\t[1] Agregar nueva ley")
+    print("\t[2] Listar todas las leyes existentes")
     print("\t[3] Buscar ley por palabra clave")
-    print("\t[4] Actualizar ley")
-    print("\t[5] Eliminar ley")
+    print("\t[4] Actualizar ley existente")
+    print("\t[5] Eliminar ley existente")
     print("\t[6] Salir")
     print(" ")
 
@@ -109,18 +107,19 @@ while True:
     print(" ")
     print("============================================")
     print("============================================")
-    print("      J U R I S D I C C I O N - A P P")
+    print("      L E G I S L A C I O N - A P P")
     print("============================================")
     print("============================================")
     print(" ")
-    print("==== MENÚ DE INICIO ====")
+    print("         ==== MENÚ DE INICIO ====")
     print(" ")
 
     mostrar_menu()
-    print("")
+    print(" ")
+    print(" ")
     opcion = input("[Por favor, ingrese una opción del 1 al 6]: ")
 
-     if opcion == "1":
+    if opcion == "1":
         n_normativa = input("Ingrese el número de normativa (Ej. 20.974) : ")
         fecha = input("Ingrese la fecha: ")
         descripcion = input("Ingrese la descripción: ")
@@ -147,13 +146,10 @@ while True:
         p_clave = input("Ingrese la palabra clave a buscar: ")
         leyes = crud.get_ley_by_p_clave(p_clave)
         for ley in leyes:
-            print("\n")
-            print("*"*150)
-            ley_t= '''Num Registro: {}\nNum Normativa: {}\nFecha: {}\nDescripcion: {}\nOrgano Legislativo: {}\nPalabra Clave: {}\nTipo Normativa: {}\nCategoria: {}\nJurisdiccion: {}\n'''.format(*ley)
-            print(ley_t)
-            print("*"*150)
+            print(ley)
+
     elif opcion == "4":
-        p_clave = input("Ingrese la palabra clave de la ley a actualizar: ")
+        p_clave = input("Ingrese la palabra clave de la ley a actualizar [Por ejemplo 20.759] : ")
         leyes = crud.get_ley_by_p_clave(p_clave)
         if leyes:
             ley_actualizar = leyes[0]
@@ -162,17 +158,8 @@ while True:
             fecha = input("Nueva fecha: ")
             descripcion = input("Nueva descripción: ")
             o_legislativo = input("Nuevo órgano legislativo: ")
-            resultado = crud.find_normativa()
-            resultado=resultado[0]
-            print(f"Tipo Normativa Actual: {resultado}")
             tnormativa_id = input("Nuevo ID de la normativa: ")
-            resultado = crud.find_categoria()
-            resultado=resultado[0]
-            print(f"La Categoria Actual: {resultado}")
             categoria_id = input("Nuevo ID de la categoría: ")
-            resultado = crud.find_jurisdiccion()
-            resultado=resultado[0]
-            print(f"La Jurisdiccion actual es: {resultado}")
             jurisdiccion_id = input("Nuevo ID de la jurisdicción: ")
 
         if n_normativa:
@@ -211,5 +198,7 @@ while True:
     else: 
         print(" ") 
         print(" ")
-        print(" ")      
-        print("/ / / / Opción inválida. Intente nuevamente. / / /")
+        print("       ................................................. ")      
+        print("/ / / / Opción inválida! por favor, inténtelo nuevamente. / / /")
+        print("       ------------------------------------------------- ") 
+        print(" ") 
