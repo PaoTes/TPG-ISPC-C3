@@ -73,26 +73,39 @@ class CRUDLeyes:
         self.connection.commit()
 
 def mostrar_menu():
-    print("==== MENÚ ====")
-    print("1. Agregar ley")
-    print("2. Mostrar todas las leyes")
-    print("3. Buscar ley por palabra clave")
-    print("4. Actualizar ley")
-    print("5. Eliminar ley")
-    print("6. Salir")
+    print("\t[1] Agregar ley")
+    print("\t[2] Listar todas las leyes")
+    print("\t[3] Buscar ley por palabra clave")
+    print("\t[4] Actualizar ley")
+    print("\t[5] Eliminar ley")
+    print("\t[6] Salir")
+    print(" ")
+
+    print("=========================================")
 
 crud = CRUDLeyes()
 
 while True:
+    print(" ")
+    print("============================================")
+    print("============================================")
+    print("      J U R I S D I C C I O N - A P P")
+    print("============================================")
+    print("============================================")
+    print(" ")
+    print("==== MENÚ DE INICIO ====")
+    print(" ")
+
     mostrar_menu()
-    opcion = input("Ingrese una opción: ")
+    print("")
+    opcion = input("[Por favor, ingrese una opción del 1 al 6]: ")
 
     if opcion == "1":
-        n_normativa = input("Ingrese el número de normativa: ")
-        fecha = input("Ingrese la fecha: ")
-        descripcion = input("Ingrese la descripción: ")
+        n_normativa = input("Ingrese el número de normativa [Por ejemplo: '20.744']: ")
+        fecha = input("Ingrese la fecha [Formato 'DD-MM-AA']: ")
+        descripcion = input("Ingrese la descripción de ley: ")
         o_legislativo = input("Ingrese el órgano legislativo: ")
-        p_clave = input("Ingrese la palabra clave: ")
+        p_clave = input("Ingrese la palabra clave [Por ejemplo: 'Trabajo']: ")
         tnormativa_id = int ( input("\n Seleccione normativa\n1. ley\n2. Norma\n3. Resolucion\nIngrese el ID de la normativa: "))
         categoria_id = int ( input("\n Seleccione categoría\n1. Laboral \n2. Penal \n3. Civil\n4. Comercial\n5. Familia y Sucesiones\n6. Agrario y Ambiental\n7. Minería\n8. Derecho informático\n	Ingrese el ID de la categoría: "))
         jurisdiccion_id = int ( input("\n Seleccion jurisdicción\n1. Nacional\n2. Provincial\n Ingrese el ID de la jurisdicción: "))
@@ -113,7 +126,7 @@ while True:
             print(ley)
 
     elif opcion == "4":
-        p_clave = input("Ingrese la palabra clave de la ley a actualizar: ")
+        p_clave = input("Ingrese la palabra clave de la ley a actualizar [Ejemplo 20.759] : ")
         leyes = crud.get_ley_by_p_clave(p_clave)
         if leyes:
             ley_actualizar = leyes[0]
@@ -149,7 +162,7 @@ while True:
         leyes = crud.get_ley_by_p_clave(p_clave)
         if leyes:
             ley_eliminar = leyes[0]
-            confirmacion = input (f"¿Está seguro de eliminar la ley con palabra clave {ley_eliminar.p_clave}? (S/N): ")
+            confirmacion = input(f"¿Está seguro de eliminar la ley con p_clave '{ley_eliminar.p_clave}'? (S/N): ")
             if confirmacion.upper() == "S":
                 crud.delete_ley(ley_eliminar)
                 print("Ley eliminada correctamente.")
@@ -159,5 +172,8 @@ while True:
     elif opcion == "6":
         break
 
-    else:
-        print("Opción inválida. Intente nuevamente.")
+    else: 
+        print(" ") 
+        print(" ")
+        print(" ")      
+        print("/ / / / Opción inválida. Intente nuevamente. / / /")
